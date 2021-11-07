@@ -3,6 +3,12 @@ package com.student.scholarship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 @RestController
 public class StudentScholarshipController {
 
@@ -25,6 +31,20 @@ public class StudentScholarshipController {
             return false;
 
         }
+    }
 
+    @GetMapping("/api/v3/call")
+    public String  apiCall() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://192.168.5.72:3000/narendra"))
+                .GET() // GET is default
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println("Response ** : " +response.statusCode());
+        System.out.println("Response Body ** : " +response.body());
+        return response.body();
     }
 }
