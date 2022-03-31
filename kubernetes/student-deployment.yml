@@ -10,9 +10,10 @@ spec:
       port: 8080
       targetPort: 8080
       protocol: TCP
+      name: httt  #Can remove if no http call
   selector:
-    app: scholarship-app
-  type: NodePort
+    app: scholarship-app   # The service exposes Pods with label
+  type: NodePort   # The service will be exposed by opening a Port on each node and proxying it.
 
 ---
 apiVersion: apps/v1
