@@ -43,6 +43,15 @@ public class StudentScholarshipController {
         }
     }
 
+    @GetMapping("/calculatescholarship")
+    public int calculateScholarship() {
+        try {
+            return studentRepository.calculateScholarship(10000);
+        } catch (Exception ex) {
+            return 00;
+
+        }
+    }
     @GetMapping("/api/v3/call")
     public String  apiCall() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();

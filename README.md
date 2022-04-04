@@ -34,3 +34,30 @@ END
 //
 DELIMITER ;
 
+
+
+##Function call :
+
+
+use flaskapi;
+DELIMITER //
+
+CREATE FUNCTION CalcIncome ( starting_value INT )
+RETURNS INT
+READS SQL DATA
+DETERMINISTIC
+BEGIN
+
+DECLARE income INT;
+
+SET income = 0;
+
+label1: WHILE income <= 3000 DO
+SET income = income + starting_value;
+END WHILE label1;
+
+RETURN income;
+
+END; //
+
+DELIMITER ;
